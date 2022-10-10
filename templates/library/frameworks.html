@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<main class="container">
+  {% include 'library/header.html' %}
+
+  <div class="row mb-2">
+    {% for book in books %}
+    <div class="col-md-6">
+        <div class="row g-0 border rounded mb-4 shadow-sm">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">{{ book.author }}</strong>
+            <h5 class="mb-0">{{ book.title }}</h5>
+            <div class="mb-1 text-muted">Релиз: {{ book.writed }}</div>
+            <p class="card-text mb-auto">{{ book.description|truncatewords:6 }}</p>
+            {% for category in book.category.all  %}
+            <a href="{% url 'book-list' %}?q={{ category.title }}">>{{ category.title }}</a>
+            {% endfor %}
+            <div class="btn-group">
+              <a href="{% url 'book' book.id %}" type="button" class="btn btn-sm btn-outline-secondary">Читать</a>
+              {% if request.user.is_superuser %}
+              <a href="{% url 'update-book' book.id %}" type="button" class="btn btn-sm btn-outline-secondary">Изменить</a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+              <img src="{{ book.image.url }}" alt="" class="bd-placehilder-img" width="200" height="250">
+          </div>
+        </div>
+      </div>
+{% endfor %}
+</main>
+{% endblock %}

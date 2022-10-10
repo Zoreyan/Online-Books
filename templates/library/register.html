@@ -1,0 +1,37 @@
+<div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Отзыв</h4>
+    <form class="needs-validation"" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label for="email" class="form-label">Name</label>
+          {{ form.name }}
+        </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="email" class="form-label">Email</label>
+              {{ form.email }}
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="email" class="form-label">Password</label>
+              {{ form.password1 }}
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="email" class="form-label">Confirm password</label>
+              {{ form.password2 }}
+            </div>
+        </div>
+
+
+      <hr class="my-4">
+
+      <button class="btn btn-primary" type="submit">Отправить</button>
+    </form>
+  </div>
+</div>

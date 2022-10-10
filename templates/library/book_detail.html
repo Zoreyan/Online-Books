@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<main class="container">
+  {% include 'library/header.html' %}
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ book.author }}</strong>
+          <h3 class="mb-0">{{ book.title }}</h3>
+          <div class="mb-1 text-muted">Релиз: {{ book.writed }}</div>
+          {% for category in book.category.all  %}
+          <a href="{% url 'book-list' %}?q={{ category.title }}" class="">{{ category.title }}</a>
+          {% endfor %}
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{ book.image.url }}" alt="" class="bd-placehilder-img" width="200" height="250">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="row g-5">
+    <div class="col-md-8">
+
+      <article class="blog-post">
+        <h2 class="blog-post-title mb-1">{{ book.title }}</h2>
+        <p class="blog-post-meta">{{ book.writed }} by <a href="{% url 'book-list' %}?a={{ book.author }}">{{ book.author }}</a></p>
+
+        <p>{{ book.description }}.</p>
+        <hr>
+        
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary rounded-pill" download="true" href="{{ book.file.url }}">Скачать PDF</a>
+        <a class="btn btn-outline-secondary rounded-pill" href="{{ book.file.url }} ">Открыть</a>
+      </nav>
+
+    </div>
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        
+
+        <div class="p-4">
+          <h4 class="fst-italic">Архивы</h4>
+          <ol class="list-unstyled mb-0">
+            {% for category in categories %}
+            <li><a href="{% url 'book-list' %}?q={{ category.title }}">{{ category.title }}</a></li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div>
+  </div>
+
+</main>
+
+
+{% endblock %}
